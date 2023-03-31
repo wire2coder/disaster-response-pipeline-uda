@@ -1,0 +1,8 @@
+numpy
+pandas
+sqlalchemy
+# NLTK
+# pickle
+# Sklearn
+# plotly
+# Flask
