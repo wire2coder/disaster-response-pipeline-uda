@@ -1,8 +1,7 @@
 numpy
 pandas
-sqlalchemy
-# NLTK
-# pickle
-# Sklearn
-# plotly
-# Flask
+sqlalchemy<2.0
+NLTK
+scikit-learn
+plotly
+Flask
