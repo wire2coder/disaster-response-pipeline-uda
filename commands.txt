@@ -11,3 +11,7 @@ pip install -r requirements.txt
 python.exe -m pip install --upgrade pip
 
 # something call a 'code space insider version'
+
+python train_classifier.py ../Piplines/ETL_Preparation.db model1.pkl
+
+cd models && python train_classifier.py ../Piplines/ETL_Preparation.db model1.pkl

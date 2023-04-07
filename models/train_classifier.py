@@ -72,30 +72,51 @@ def tokenize(text):
     pass
 
 
-def build_pipeline():
-     """
-    Build Pipeline function
+# Build a custom transformer which will extract the starting verb of a sentence
+class StartingVerbExtractor(BaseEstimator, TransformerMixin):
+    """
+    Starting Verb Extractor class
     
-    Output:
-        A Scikit ML Pipeline that process text messages and apply a classifier.
-        
+    This class extract the starting verb of a sentence,
+    creating a new feature for the ML classifier
     """
 
-    pipeline2 = Pipeline([
-        ('features', FeatureUnion([
+    def starting_verb(self, text):
+        sentence_list = nltk.sent_tokenize(text)
 
+        for sentence in sentence_list:
+            pos_tags = nltk.pos_tag(tokenize(sentence))
+            first_word, first_tag = pos_tags[0]
+
+            if first_tag in ['VB', 'VBP'] or first_word == 'RT':
+                return True
+            
+        return False
+
+    # Given it is a tranformer we can return the self 
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        X_tagged = pd.Series(X).apply(self.starting_verb)
+        return pd.DataFrame(X_tagged)
+
+
+def build_pipeline():
+
+    # fixed 'indentation syntax error'
+    pipeline1 = Pipeline([
+        ('features', FeatureUnion([
             ('text_pipeline', Pipeline([
                 ('count_vectorizer', CountVectorizer(tokenizer=tokenize)),
                 ('tfidf_transformer', TfidfTransformer())
             ])),
-
             ('starting_verb_transformer', StartingVerbExtractor())
         ])),
-
         ('classifier', MultiOutputClassifier(AdaBoostClassifier()))
     ])
 
-    return pipeline2
+    return pipeline1
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
@@ -121,8 +142,8 @@ def main():
         print('Building model...')
         model = build_pipeline()
         
-        # print('Training model...')
-        # model.fit(X_train, Y_train)
+        print('Training model...')
+        model.fit(X_train, Y_train)
         
         # print('Evaluating model...')
         # evaluate_model(model, X_test, Y_test, category_names)
