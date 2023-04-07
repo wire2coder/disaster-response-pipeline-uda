@@ -103,21 +103,7 @@ class StartingVerbExtractor(BaseEstimator, TransformerMixin):
 
 
 def build_pipeline():
-
-    # fixed 'indentation syntax error'
-    pipeline1 = Pipeline([
-        ('features', FeatureUnion([
-            ('text_pipeline', Pipeline([
-                ('count_vectorizer', CountVectorizer(tokenizer=tokenize)),
-                ('tfidf_transformer', TfidfTransformer())
-            ])),
-            ('starting_verb_transformer', StartingVerbExtractor())
-        ])),
-        ('classifier', MultiOutputClassifier(AdaBoostClassifier()))
-    ])
-
-    return pipeline1
-
+    pass
 
 def evaluate_model(model, X_test, Y_test, category_names):
     pass
