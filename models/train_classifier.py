@@ -153,50 +153,6 @@ def build_pipeline():
     return pipeline
 
 
-def multioutput_fscore(y_true,y_pred,beta=1):
-    """
-    MultiOutput Fscore
-
-    It is a sort of geometric mean of the fbeta_score, computed on each label.
-    
-    It is compatible with multi-label and multi-class problems.
-    It features some peculiarities (geometric mean, 100% removal...) to exclude
-    trivial solutions and deliberatly under-estimate a stangd fbeta_score average.
-    The aim is avoiding issues when dealing with multi-class/multi-label imbalanced cases.
-    
-    It can be used as scorer for GridSearchCV:
-        scorer = make_scorer(multioutput_fscore,beta=1)
-        
-    Arguments:
-        y_true -> List of labels
-        y_prod -> List of predictions
-        beta -> Beta value to be used to calculate fscore metric
-    
-    Output:
-        f1score -> Calculation geometric mean of fscore
-    """
-    
-    # If provided y predictions is a dataframe then extract the values from that
-    if isinstance(y_pred, pd.DataFrame) == True:
-        y_pred = y_pred.values
-    
-    # If provided y actuals is a dataframe then extract the values from that
-    if isinstance(y_true, pd.DataFrame) == True:
-        y_true = y_true.values
-    
-    f1score_list = []
-    for column in range(0,y_true.shape[1]):
-        score = fbeta_score(y_true[:,column],y_pred[:,column],beta,average='weighted')
-        f1score_list.append(score)
-        
-    f1score = np.asarray(f1score_list)
-    f1score = f1score[f1score<1]
-    
-    # Get the geometric mean of f1score
-    f1score = gmean(f1score)
-
-    return f1score
-
 
 def evaluate_pipeline(pipeline, X_test, Y_test, category_names):
     """
@@ -212,12 +168,10 @@ def evaluate_pipeline(pipeline, X_test, Y_test, category_names):
     """
     Y_pred = pipeline.predict(X_test)
     
-    # multi_f1 = multioutput_fscore(Y_test,Y_pred, beta = 1)
     overall_accuracy = (Y_pred == Y_test).mean().mean()
 
     print('Average overall accuracy {0:.2f}%'.format(overall_accuracy*100))
-    # print('F1 score (custom definition) {0:.2f}%'.format(multi_f1*100))
-
+    
     # Print the whole classification report.
     Y_pred = pd.DataFrame(Y_pred, columns = Y_test.columns)
     
