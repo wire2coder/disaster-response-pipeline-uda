@@ -18,7 +18,7 @@ cd models && python train_classifier.py ../Piplines/ETL_Preparation.db model1.pk
 
 python train_classifier.py ../Piplines/ETL_Preparation.db new1.pkl 
 
-
+http://127.0.0.1:3001/
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Output
