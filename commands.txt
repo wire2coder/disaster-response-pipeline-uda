@@ -12,6 +12,395 @@ python.exe -m pip install --upgrade pip
 
 # something call a 'code space insider version'
 
-python train_classifier.py ../Piplines/ETL_Preparation.db model1.pkl
+python train_classifier.py ../Piplines/ETL_Preparation.db mo2.pkl
 
 cd models && python train_classifier.py ../Piplines/ETL_Preparation.db model1.pkl
+
+python train_classifier.py ../Piplines/ETL_Preparation.db new1.pkl 
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Output
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(myenv) @wire2coder ➜ /workspaces/disaster-response-pipeline-uda/models (master) $ python train_classifier.py ../Piplines/ETL_Preparation.db new1.pkl 
+[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package wordnet to
+[nltk_data]     /home/codespace/nltk_data...
+[nltk_data]   Package wordnet is already up-to-date!
+[nltk_data] Downloading package averaged_perceptron_tagger to
+[nltk_data]     /home/codespace/nltk_data...
+[nltk_data]   Package averaged_perceptron_tagger is already up-to-
+[nltk_data]       date!
+Loading data...
+    DATABASE: ../Piplines/ETL_Preparation.db
+Building model...
+Training model...
+/workspaces/disaster-response-pipeline-uda/myenv/lib/python3.10/site-packages/sklearn/feature_extraction/text.py:528: UserWarning: The parameter 'token_pattern' will not be used since 'tokenizer' is not None'
+  warnings.warn(
+Evaluating model...
+Average overall accuracy 94.89%
+Model Performance with Category: related
+              precision    recall  f1-score   support
+
+           0       0.64      0.37      0.47      1252
+           1       0.83      0.94      0.88      3992
+
+    accuracy                           0.80      5244
+   macro avg       0.73      0.65      0.67      5244
+weighted avg       0.78      0.80      0.78      5244
+
+Model Performance with Category: request
+              precision    recall  f1-score   support
+
+           0       0.91      0.96      0.93      4323
+           1       0.75      0.55      0.63       921
+
+    accuracy                           0.89      5244
+   macro avg       0.83      0.75      0.78      5244
+weighted avg       0.88      0.89      0.88      5244
+
+Model Performance with Category: offer
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      1.00      5217
+           1       0.00      0.00      0.00        27
+
+    accuracy                           0.99      5244
+   macro avg       0.50      0.50      0.50      5244
+weighted avg       0.99      0.99      0.99      5244
+
+Model Performance with Category: aid_related
+              precision    recall  f1-score   support
+
+           0       0.76      0.87      0.81      3081
+           1       0.77      0.61      0.68      2163
+
+    accuracy                           0.76      5244
+   macro avg       0.76      0.74      0.74      5244
+weighted avg       0.76      0.76      0.76      5244
+
+Model Performance with Category: medical_help
+              precision    recall  f1-score   support
+
+           0       0.94      0.99      0.97      4839
+           1       0.69      0.29      0.41       405
+
+    accuracy                           0.94      5244
+   macro avg       0.82      0.64      0.69      5244
+weighted avg       0.92      0.94      0.92      5244
+
+Model Performance with Category: medical_products
+              precision    recall  f1-score   support
+
+           0       0.97      0.99      0.98      4986
+           1       0.66      0.38      0.48       258
+
+    accuracy                           0.96      5244
+   macro avg       0.82      0.68      0.73      5244
+weighted avg       0.95      0.96      0.95      5244
+
+Model Performance with Category: search_and_rescue
+              precision    recall  f1-score   support
+
+           0       0.98      1.00      0.99      5110
+           1       0.73      0.18      0.29       134
+
+    accuracy                           0.98      5244
+   macro avg       0.85      0.59      0.64      5244
+weighted avg       0.97      0.98      0.97      5244
+
+Model Performance with Category: security
+              precision    recall  f1-score   support
+
+           0       0.98      1.00      0.99      5162
+           1       0.18      0.04      0.06        82
+
+    accuracy                           0.98      5244
+   macro avg       0.58      0.52      0.53      5244
+weighted avg       0.97      0.98      0.98      5244
+
+Model Performance with Category: military
+              precision    recall  f1-score   support
+
+           0       0.98      0.99      0.99      5076
+           1       0.67      0.31      0.42       168
+
+    accuracy                           0.97      5244
+   macro avg       0.82      0.65      0.70      5244
+weighted avg       0.97      0.97      0.97      5244
+
+Model Performance with Category: child_alone
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      5244
+
+    accuracy                           1.00      5244
+   macro avg       1.00      1.00      1.00      5244
+weighted avg       1.00      1.00      1.00      5244
+
+Model Performance with Category: water
+              precision    recall  f1-score   support
+
+           0       0.98      0.98      0.98      4917
+           1       0.75      0.66      0.70       327
+
+    accuracy                           0.96      5244
+   macro avg       0.86      0.82      0.84      5244
+weighted avg       0.96      0.96      0.96      5244
+
+Model Performance with Category: food
+              precision    recall  f1-score   support
+
+           0       0.96      0.98      0.97      4633
+           1       0.83      0.66      0.74       611
+
+    accuracy                           0.94      5244
+   macro avg       0.89      0.82      0.85      5244
+weighted avg       0.94      0.94      0.94      5244
+
+Model Performance with Category: shelter
+              precision    recall  f1-score   support
+
+           0       0.96      0.98      0.97      4779
+           1       0.73      0.54      0.62       465
+
+    accuracy                           0.94      5244
+   macro avg       0.84      0.76      0.79      5244
+weighted avg       0.94      0.94      0.94      5244
+
+Model Performance with Category: clothing
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      0.99      5167
+           1       0.66      0.38      0.48        77
+
+    accuracy                           0.99      5244
+   macro avg       0.82      0.69      0.74      5244
+weighted avg       0.99      0.99      0.99      5244
+
+Model Performance with Category: money
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99      5130
+           1       0.53      0.34      0.41       114
+
+    accuracy                           0.98      5244
+   macro avg       0.76      0.67      0.70      5244
+weighted avg       0.98      0.98      0.98      5244
+
+Model Performance with Category: missing_people
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      1.00      5199
+           1       0.38      0.13      0.20        45
+
+    accuracy                           0.99      5244
+   macro avg       0.68      0.57      0.60      5244
+weighted avg       0.99      0.99      0.99      5244
+
+Model Performance with Category: refugees
+              precision    recall  f1-score   support
+
+           0       0.98      0.99      0.99      5064
+           1       0.68      0.31      0.42       180
+
+    accuracy                           0.97      5244
+   macro avg       0.83      0.65      0.70      5244
+weighted avg       0.97      0.97      0.97      5244
+
+Model Performance with Category: death
+              precision    recall  f1-score   support
+
+           0       0.98      0.99      0.98      5005
+           1       0.80      0.48      0.60       239
+
+    accuracy                           0.97      5244
+   macro avg       0.89      0.74      0.79      5244
+weighted avg       0.97      0.97      0.97      5244
+
+Model Performance with Category: other_aid
+              precision    recall  f1-score   support
+
+           0       0.88      0.98      0.93      4561
+           1       0.52      0.15      0.23       683
+
+    accuracy                           0.87      5244
+   macro avg       0.70      0.56      0.58      5244
+weighted avg       0.84      0.87      0.84      5244
+
+Model Performance with Category: infrastructure_related
+              precision    recall  f1-score   support
+
+           0       0.94      0.99      0.96      4905
+           1       0.40      0.11      0.18       339
+
+    accuracy                           0.93      5244
+   macro avg       0.67      0.55      0.57      5244
+weighted avg       0.91      0.93      0.91      5244
+
+Model Performance with Category: transport
+              precision    recall  f1-score   support
+
+           0       0.97      0.99      0.98      5021
+           1       0.59      0.25      0.35       223
+
+    accuracy                           0.96      5244
+   macro avg       0.78      0.62      0.67      5244
+weighted avg       0.95      0.96      0.95      5244
+
+Model Performance with Category: buildings
+              precision    recall  f1-score   support
+
+           0       0.97      0.99      0.98      4986
+           1       0.63      0.39      0.48       258
+
+    accuracy                           0.96      5244
+   macro avg       0.80      0.69      0.73      5244
+weighted avg       0.95      0.96      0.95      5244
+
+Model Performance with Category: electricity
+              precision    recall  f1-score   support
+
+           0       0.98      0.99      0.99      5134
+           1       0.48      0.26      0.34       110
+
+    accuracy                           0.98      5244
+   macro avg       0.73      0.63      0.66      5244
+weighted avg       0.97      0.98      0.98      5244
+
+Model Performance with Category: tools
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      1.00      5206
+           1       0.00      0.00      0.00        38
+
+    accuracy                           0.99      5244
+   macro avg       0.50      0.50      0.50      5244
+weighted avg       0.99      0.99      0.99      5244
+
+Model Performance with Category: hospitals
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      0.99      5191
+           1       0.22      0.08      0.11        53
+
+    accuracy                           0.99      5244
+   macro avg       0.61      0.54      0.55      5244
+weighted avg       0.98      0.99      0.99      5244
+
+Model Performance with Category: shops
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      5223
+           1       0.33      0.05      0.08        21
+
+    accuracy                           1.00      5244
+   macro avg       0.66      0.52      0.54      5244
+weighted avg       0.99      1.00      0.99      5244
+
+Model Performance with Category: aid_centers
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      0.99      5178
+           1       0.38      0.09      0.15        66
+
+    accuracy                           0.99      5244
+   macro avg       0.68      0.54      0.57      5244
+weighted avg       0.98      0.99      0.98      5244
+
+Model Performance with Category: other_infrastructure
+              precision    recall  f1-score   support
+
+           0       0.96      0.99      0.98      5013
+           1       0.33      0.10      0.15       231
+
+    accuracy                           0.95      5244
+   macro avg       0.64      0.54      0.56      5244
+weighted avg       0.93      0.95      0.94      5244
+
+Model Performance with Category: weather_related
+              precision    recall  f1-score   support
+
+           0       0.88      0.96      0.92      3783
+           1       0.86      0.66      0.74      1461
+
+    accuracy                           0.87      5244
+   macro avg       0.87      0.81      0.83      5244
+weighted avg       0.87      0.87      0.87      5244
+
+Model Performance with Category: floods
+              precision    recall  f1-score   support
+
+           0       0.96      0.99      0.98      4809
+           1       0.87      0.56      0.68       435
+
+    accuracy                           0.96      5244
+   macro avg       0.92      0.78      0.83      5244
+weighted avg       0.95      0.96      0.95      5244
+
+Model Performance with Category: storm
+              precision    recall  f1-score   support
+
+           0       0.95      0.99      0.97      4766
+           1       0.78      0.45      0.57       478
+
+    accuracy                           0.94      5244
+   macro avg       0.86      0.72      0.77      5244
+weighted avg       0.93      0.94      0.93      5244
+
+Model Performance with Category: fire
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      0.99      5191
+           1       0.50      0.28      0.36        53
+
+    accuracy                           0.99      5244
+   macro avg       0.75      0.64      0.68      5244
+weighted avg       0.99      0.99      0.99      5244
+
+Model Performance with Category: earthquake
+              precision    recall  f1-score   support
+
+           0       0.98      0.99      0.98      4752
+           1       0.88      0.78      0.83       492
+
+    accuracy                           0.97      5244
+   macro avg       0.93      0.88      0.91      5244
+weighted avg       0.97      0.97      0.97      5244
+
+Model Performance with Category: cold
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      0.99      5117
+           1       0.81      0.41      0.54       127
+
+    accuracy                           0.98      5244
+   macro avg       0.90      0.70      0.77      5244
+weighted avg       0.98      0.98      0.98      5244
+
+Model Performance with Category: other_weather
+              precision    recall  f1-score   support
+
+           0       0.95      0.99      0.97      4966
+           1       0.54      0.14      0.22       278
+
+    accuracy                           0.95      5244
+   macro avg       0.74      0.57      0.60      5244
+weighted avg       0.93      0.95      0.93      5244
+
+Model Performance with Category: direct_report
+              precision    recall  f1-score   support
+
+           0       0.89      0.95      0.92      4211
+           1       0.72      0.50      0.59      1033
+
+    accuracy                           0.86      5244
+   macro avg       0.81      0.73      0.75      5244
+weighted avg       0.85      0.86      0.85      5244
+
+Saving model...
+    MODEL: new1.pkl
+Trained model saved!

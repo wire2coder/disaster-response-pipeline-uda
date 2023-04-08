@@ -181,12 +181,13 @@ def evaluate_pipeline(pipeline, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
-    pass
+    pickle.dump(model, open(model_filepath, 'wb'))
 
 
 def main():
     if len(sys.argv) == 3:
-        # > python train_classifier.py ../Piplines/ETL_Preparation.db model1.pkl
+        # make sure to use a different 'pickle' file name for each run
+        # python train_classifier.py ../Piplines/ETL_Preparation.db new1.pkl 
 
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
@@ -205,10 +206,10 @@ def main():
         print('Evaluating model...')
         evaluate_pipeline(model, X_test, Y_test, category_names)
 
-        # print('Saving model...\n    MODEL: {}'.format(model_filepath))
-        # save_model(model, model_filepath)
+        print('Saving model...\n    MODEL: {}'.format(model_filepath))
+        save_model(model, model_filepath)
 
-        # print('Trained model saved!')
+        print('Trained model saved!')
 
     else:
         print('Please provide the filepath of the disaster messages database '\
