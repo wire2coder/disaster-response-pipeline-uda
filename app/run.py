@@ -56,7 +56,7 @@ engine = create_engine('sqlite:///../Piplines/ETL_Preparation.db')
 df = pd.read_sql_table('ETL_Preparation', engine)
 
 # load model
-model = joblib.load("../Piplines/mo2.pkl")
+model = joblib.load("../models/mo2.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
