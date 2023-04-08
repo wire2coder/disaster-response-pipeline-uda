@@ -56,7 +56,7 @@ engine = create_engine('sqlite:///../Piplines/ETL_Preparation.db')
 df = pd.read_sql_table('ETL_Preparation', engine)
 
 # load model
-model = joblib.load("../models/new1.pkl")
+model = joblib.load("../Piplines/mo2.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -75,6 +75,7 @@ def index():
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
+            # GRAPH 1 - genre graph
         {
             'data': [
                 Bar(
@@ -93,8 +94,7 @@ def index():
                 }
             }
         },
-    
-        # GRAPH 2 - category graph        
+            # GRAPH 2 - category graph    
         {
             'data': [
                 Bar(
