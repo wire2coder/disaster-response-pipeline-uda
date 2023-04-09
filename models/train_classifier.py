@@ -101,7 +101,7 @@ def build_pipeline():
                 ('tfidf_transformer', TfidfTransformer())
             ])),
 
-            ('starting_verb_transformer', StartingVerbExtractor())
+            ('ivd1', InitialVerbDetector() )
         ])),
 
         ('classifier', MultiOutputClassifier(AdaBoostClassifier()))
