@@ -54,7 +54,7 @@ pip install -r requirements.txt
 
 ## Executing Program
 ```
-cd models && python train_classifier.py ../Piplines/ETL_Preparation.db model1.pkl
+cd models && python train_classifier.py ../Piplines/ETL_Preparation.db mo3.pkl
 cd app && python run.py 
 ```
 go to http://127.0.0.1:3001/
