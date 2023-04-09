@@ -1,33 +1,74 @@
-# Disaster Response Pipeline Project
+## Table of Contents
+- [Description](#description)
+- [Getting Started](#getting-started)
+- [Dependencies](#dependencies)
+- [Installing](#installing)
+- [Executing Program](#executing-program)
+- [Screenshots](#screenshots)
 
-### Instructions:
-1. Run the following commands in the project's root directory to set up your database and model.
+## Description
+The objective is to construct a Natural Language Processing (NLP) model capable of categorizing messages from real-life disaster events. The dataset consists of pre-labeled tweets and messages. The project is divided into three main sections. 
 
-    - To run ETL pipeline that cleans data and stores in database
-        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`
-    - To run ML pipeline that trains classifier and saves
-        `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
+    Data processing:
+        Develop an ETL pipeline to extract data from the source
+        Clean the data
+        Save the cleaned data in a SQLite database
 
-2. Run the following command in the app's directory to run your web app.
-    `python run.py`
+    Machine learning pipeline:
+        Build a machine learning pipeline
+        Train the model to classify text messages into various categories
 
-3. Go to http://0.0.0.0:3001/
+    Web application:
+        Run a web application to display the results of the model in real-time.
 
+## Getting Started
+1. run Piplines/ETL Pipeline Preparation.ipynb and will make ETL_Preparation.db file
+2. run Piplines/ML Pipeline Preparation.ipynb and will make mo2.pkl file
+3. in models/train_classifier.py is doing the samething as ML Pipeline Preparation.ipynb, it creates mo2.pkl file
 
-### Notes
+## Dependencies
+
+requirements.txt
+
+- numpy
+- pandas
+- sqlalchemy<2.0
+- NLTK
+- scikit-learn
+- plotly
+- Flask
+
+## Installing
+
 ```
-You are right, there are many different names that can be used to refer to the 'target variable' in machine learning.
+python -m venv myenv
 
-Here are some of the most common terms you may come across:
+# for windows
+myenv\Scripts\activate.bat
 
-    Target variable
-    Dependent variable
-    Response variable
-    Outcome variable
-    Label
-    Class
+# for linux and macOS
+source myenv/bin/activate
 
-Each of these terms refers to the variable we are trying to predict or estimate using the input data. The choice of terminology may depend on the specific field of study, the nature of the problem being addressed, or personal preference.
-
-Regardless of the term used, the target variable is a fundamental component of a supervised learning problem, where the goal is to train a machine learning model to make accurate predictions of the target variable based on the input data.
+pip install -r requirements.txt
 ```
+
+## Executing Program
+```
+cd models && python train_classifier.py ../Piplines/ETL_Preparation.db model1.pkl
+cd app && python run.py 
+```
+go to http://127.0.0.1:3001/
+
+
+## Screenshots
+![alt text](screenshots/1.png)
+![alt text](screenshots/1.png)
+![alt text](screenshots/1.png)
+![alt text](screenshots/etl_database.png)
+
+
+
+
+
+
+
