@@ -16,7 +16,7 @@ python train_classifier.py ../Piplines/ETL_Preparation.db mo2.pkl
 
 cd models && python train_classifier.py ../Piplines/ETL_Preparation.db model1.pkl
 
-python train_classifier.py ../Piplines/ETL_Preparation.db new1.pkl 
+cd app && python run.py 
 
 http://127.0.0.1:3001/
 

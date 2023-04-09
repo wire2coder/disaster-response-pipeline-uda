@@ -21,23 +21,27 @@ from sqlalchemy import create_engine
 app = Flask(__name__)
 
 
-class StartingVerbExtractor(BaseEstimator, TransformerMixin):
+class InitialVerbDetector(BaseEstimator, TransformerMixin):
 
-    def starting_verb(self, text):
-        sentence_list = nltk.sent_tokenize(text)
-        for sentence in sentence_list:
+    def detect_initial_verb(self, input_text):
+        sentences = nltk.sent_tokenize(input_text)
+
+        for sentence in sentences:
             pos_tags = nltk.pos_tag(tokenize(sentence))
-            first_word, first_tag = pos_tags[0]
-            if first_tag in ['VB', 'VBP'] or first_word == 'RT':
+            initial_word, initial_tag = pos_tags[0]
+
+            if initial_tag in ['VB', 'VBP'] or initial_word == 'RT':
                 return True
+
         return False
 
-    def fit(self, X, y=None):
-        return self
+    def transform(self, input_data):
+        tagged_data = pd.Series(input_data).apply(self.detect_initial_verb)
+        return pd.DataFrame(tagged_data)
 
-    def transform(self, X):
-        X_tagged = pd.Series(X).apply(self.starting_verb)
-        return pd.DataFrame(X_tagged)
+    # Implements the scikit-learn transformer interface by returning 'self'
+    def fit(self, input_data, target_data=None):
+        return self
 
 
 def tokenize(text):
@@ -69,14 +73,14 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
 
-    category_names = df.iloc[:,4:].columns
-    category_boolean = (df.iloc[:,4:] != 0).sum().values
+    word_name = df.iloc[ : , 4 : ].columns
+    word_values = (df.iloc[ : , 4 : ] != 0).sum().values
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
-            # GRAPH 1 - genre graph
-        {
+            
+        {  # graph 1, already here
             'data': [
                 Bar(
                     x=genre_names,
@@ -94,23 +98,22 @@ def index():
                 }
             }
         },
-            # GRAPH 2 - category graph    
-        {
+        { # graph 2, extra  
             'data': [
                 Bar(
-                    x=category_names,
-                    y=category_boolean
+                    x = word_name,
+                    y = word_values
                 )
             ],
 
             'layout': {
-                'title': 'Distribution of Message Categories',
+                'title': 'Distribution of Words',
                 'yaxis': {
                     'title': "Count"
                 },
                 'xaxis': {
-                    'title': "Category",
-                    'tickangle': 35
+                    'title': "Category (Words)",
+                    'tickangle': 25
                 }
             }
         }
@@ -118,7 +121,7 @@ def index():
     
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
-    graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
+    graphJSON = json.dumps(graphs, cls = plotly.utils.PlotlyJSONEncoder)
     
     # render web page with plotly graphs
     return render_template('master.html', ids=ids, graphJSON=graphJSON)
@@ -137,8 +140,8 @@ def go():
     # This will render the go.html Please see that file. 
     return render_template(
         'go.html',
-        query=query,
-        classification_result=classification_results
+        query = query,
+        classification_result = classification_results
     )
 
 

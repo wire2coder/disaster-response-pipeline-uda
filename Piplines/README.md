@@ -1,12 +1,74 @@
-## Start by running the 
- - "ETL Pipeline Preparation.ipynb" notebook before moving on to the 
- - "ML Pipeline Preparation.ipynb" notebook. 
- 
- The former notebook requires two CSV files, "categories.csv" and "messages.csv", while also generating an essential database file called "ETL_Preparation.db" which is required for the latter notebook.
+## Table of Contents
+- [Description](#description)
+- [Getting Started](#getting-started)
+- [Dependencies](#dependencies)
+- [Installing](#installing)
+- [Executing Program](#executing-program)
+- [Screenshots](#screenshots)
+
+## Description
+The objective is to construct a Natural Language Processing (NLP) model capable of categorizing messages from real-life disaster events. The dataset consists of pre-labeled tweets and messages. The project is divided into three main sections. 
+
+    Data processing:
+        Develop an ETL pipeline to extract data from the source
+        Clean the data
+        Save the cleaned data in a SQLite database
+
+    Machine learning pipeline:
+        Build a machine learning pipeline
+        Train the model to classify text messages into various categories
+
+    Web application:
+        Run a web application to display the results of the model in real-time.
+
+## Getting Started
+1. run Piplines/ETL Pipeline Preparation.ipynb and will make ETL_Preparation.db file
+2. run Piplines/ML Pipeline Preparation.ipynb and will make mo2.pkl file
+3. in models/train_classifier.py is doing the samething as ML Pipeline Preparation.ipynb, it creates mo2.pkl file
+
+## Dependencies
+
+requirements.txt
+
+- numpy
+- pandas
+- sqlalchemy<2.0
+- NLTK
+- scikit-learn
+- plotly
+- Flask
+
+## Installing
 
 ```
- ETL Pipeline Preparation.ipynb >> ETL_Preparation.db
+python -m venv myenv
+
+# for windows
+myenv\Scripts\activate.bat
+
+# for linux and macOS
+source myenv/bin/activate
+
+pip install -r requirements.txt
 ```
 
-### This folder is for the ETL pipeline. (Extract, Transform, Load), not required for the Python Flask app.
+## Executing Program
+```
+cd models && python train_classifier.py ../Piplines/ETL_Preparation.db model1.pkl
+cd app && python run.py 
+```
+go to http://127.0.0.1:3001/
+
+
+## Screenshots
+![alt text](screenshots/1.png)
+![alt text](screenshots/1.png)
+![alt text](screenshots/1.png)
+![alt text](screenshots/etl_database.png)
+
+
+
+
+
+
 
