@@ -75,8 +75,8 @@ go to http://127.0.0.1:3001/
 
 ## Screenshots
 ![alt text](screenshots/1.png)
-![alt text](screenshots/1.png)
-![alt text](screenshots/1.png)
+![alt text](screenshots/2.png)
+![alt text](screenshots/3.png)
 ![alt text](screenshots/etl_database.png)
 
 
