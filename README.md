@@ -53,9 +53,22 @@ pip install -r requirements.txt
 ```
 
 ## Executing Program
+Making the database file
+```
+cd data
+python process_data.py disaster_messages.csv disaster_categories.csv ETL_Preparation.db
+```
+
+Making the 'pickle file'
 ```
 cd models && python train_classifier.py ../Piplines/ETL_Preparation.db mo3.pkl
 cd app && python run.py 
+```
+
+Run the 'Flask application'
+```
+cd app
+python run.py
 ```
 go to http://127.0.0.1:3001/
 
