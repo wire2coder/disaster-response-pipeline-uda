@@ -24,7 +24,8 @@ The objective is to construct a Natural Language Processing (NLP) model capable 
 ## Getting Started
 1. run Piplines/ETL Pipeline Preparation.ipynb and will make ETL_Preparation.db file
 2. run Piplines/ML Pipeline Preparation.ipynb and will make mo2.pkl file
-3. in models/train_classifier.py is doing the samething as ML Pipeline Preparation.ipynb, it creates mo2.pkl file
+3. in data/process_data.py is doing the samething as ETL Pipeline Preparation.ipynb, creates the ETL_Preparation.db file
+4. in models/train_classifier.py is doing the samething as ML Pipeline Preparation.ipynb, it creates mo2.pkl file
 
 ## Dependencies
 
