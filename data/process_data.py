@@ -68,9 +68,15 @@ def clean_categories_data(df):
 
 
 def save_data_to_db(df, database_filename):
+    # check if file exist, if exist, delete it
+    import os
+
+    if os.path.exists(database_filename):
+        os.remove(database_filename)
+
     engine = create_engine('sqlite:///'+database_filename)
-    # df.to_sql('ETL_Preparation', engine, index=False)
-    df.to_sql('ETL_Preparation', engine, index=False, if_exists='replace')
+    df.to_sql('ETL_Preparation', engine, index=False)
+    # df.to_sql('ETL_Preparation', engine, index=False, if_exists='replace')
 
 
 # function for making a 'database' from 2 csv files

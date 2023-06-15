@@ -118,7 +118,7 @@ def build_pipeline():
         ('features', FeatureUnion([
 
             ('text_pipeline', Pipeline([
-                ('count_vectorizer', CountVectorizer(tokenizer=tokenize)),
+                ('count_vectorizer', CountVectorizer(tokenizer=tokenize1)),
                 ('tfidf_transformer', TfidfTransformer())
             ]))
             
@@ -147,6 +147,11 @@ def evaluate_pipeline(pipeline, X_test, Y_test, category_names):
 
 
 def save_model(model1, filepath1):
+    import os
+
+    # check if the file already exists, if so, delete it
+    if os.path.exists(filepath1):
+        os.remove(filepath1)
 
     with open(filepath1, 'wb') as file1:
         pickle.dump(model1, file1)
@@ -169,9 +174,6 @@ def main():
     if len(sys.argv) == 3:
         # make sure to use a different 'pickle' file name for each run
         # python train_classifier.py ../Piplines/ETL_Preparation.db new1.pkl 
-
-        # copy the ETL_Preparation.db to the 'models' folder
-        # copyfile1()
 
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))

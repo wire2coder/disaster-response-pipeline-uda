@@ -70,17 +70,18 @@ pip install -r requirements.txt
 ```
 
 ## Executing Program
-Making the database file
-```
-cd data
-python process_data.py disaster_messages.csv disaster_categories.csv ETL_Preparation.db
-```
 
 go back to the 'root location' before running the command below
+'root location' is disaster-response-pipeline-uda
+
+Making the database file
+```
+python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv ETL_Preparation.db
+```
 
 Making the 'pickle file'
 ```
-python models/train_classifier.py Piplines/ETL_Preparation.db mo3.pkl
+python models/train_classifier.py ./ETL_Preparation.db ./mo3.pkl
 python app/run.py 
 ```
 
