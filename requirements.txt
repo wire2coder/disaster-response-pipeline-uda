@@ -1,5 +1,7 @@
 numpy
 pandas
+matplotlib
+seaborn
 sqlalchemy<2.0
 NLTK
 scikit-learn

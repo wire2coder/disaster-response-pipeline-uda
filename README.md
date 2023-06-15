@@ -1,10 +1,14 @@
 ## Table of Contents
+- [Summary](#summary)
 - [Description](#description)
 - [Getting Started](#getting-started)
 - [Dependencies](#dependencies)
 - [Installing](#installing)
 - [Executing Program](#executing-program)
 - [Screenshots](#screenshots)
+
+## Summary
+here1, 0713_Thu_15June2023
 
 ## Description
 The objective is to construct a Natural Language Processing (NLP) model capable of categorizing messages from real-life disaster events. The dataset consists of pre-labeled tweets and messages. The project is divided into three main sections. 
