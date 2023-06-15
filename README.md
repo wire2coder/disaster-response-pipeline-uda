@@ -1,6 +1,7 @@
 ## Table of Contents
 - [Summary](#summary)
 - [Description](#description)
+- [Metrics for Results](#metrics)
 - [Getting Started](#getting-started)
 - [Dependencies](#dependencies)
 - [Installing](#installing)
@@ -24,6 +25,17 @@ The objective is to construct a Natural Language Processing (NLP) model capable 
 
     Web application:
         Run a web application to display the results of the model in real-time.
+
+## Metrics for Results
+
+1. **Precision**: If your model predicts a message as 'related', precision tells you how likely it is that the message is indeed 'related'. High precision is good.
+
+2. **Recall**: Out of all the 'related' messages, recall tells you how many of them your model was able to find. High recall is good.
+
+3. **F1-Score**: This is a combination of precision and recall into a single number. It tries to give you a single score to evaluate your model instead of having to look at two different ones (precision and recall). Again, a high F1 score is good.
+
+4. **Support**: This tells you how many examples of each class you had in the data you used to evaluate the model.
+
 
 ## Getting Started
 1. run Piplines/ETL Pipeline Preparation.ipynb and will make ETL_Preparation.db file
@@ -64,10 +76,12 @@ cd data
 python process_data.py disaster_messages.csv disaster_categories.csv ETL_Preparation.db
 ```
 
+go back to the 'root location' before running the command below
+
 Making the 'pickle file'
 ```
-cd models && python train_classifier.py ../Piplines/ETL_Preparation.db mo3.pkl
-cd app && python run.py 
+python models/train_classifier.py Piplines/ETL_Preparation.db mo3.pkl
+python app/run.py 
 ```
 
 Run the 'Flask application'

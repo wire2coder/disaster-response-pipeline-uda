@@ -1,15 +1,16 @@
 import sys
 import re
+import pickle
 import numpy as np
 import pandas as pd
-
-from sqlalchemy import create_engine
-import pickle
+import shutil
 
 import nltk
 nltk.download('punkt')
 nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger')
+
+from sqlalchemy import create_engine
 
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.model_selection import train_test_split
@@ -22,9 +23,16 @@ from sklearn.base import BaseEstimator,TransformerMixin
 
 
 def load_data(database_filepath):
-    
+    # what does this fuction do?
+
     engine1 = create_engine('sqlite:///'+database_filepath)    
-    df = pd.read_sql_table('ETL_Preparation', engine1)
+
+    try:
+        df = pd.read_sql_table('ETL_Preparation', engine1)
+    except ValueError as e:
+        print(f"An error occurred: {e}")
+        sys.exit(1)
+
     
      # Given value 2 in the related field are neglible so it could be error. Replacing 2 with 1 to consider it a valid response.
     # Alternatively, we could have assumed it to be 0 also. In the absence of information I have gone with majority class.
@@ -41,7 +49,15 @@ def load_data(database_filepath):
     return X, y, category_names
 
 
-def tokenize(text, url_place_holder_string="urlplaceholder"):
+def tokenize1(text, url_place_holder_string="urlplaceholder"):
+    # what does this fuction do?
+    # 1. Replace all urls with a urlplaceholder string
+    # 2. Extract all the urls from the provided text
+    # 3. Replace url with a url placeholder string
+    # 4. Extract the word tokens from the provided text
+    # 5. Lemmanitizer to remove inflectional and derivationally related forms of a word
+    # 6. List of clean tokens
+
     
     # Replace all urls with a urlplaceholder string
     url_regex = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
@@ -64,7 +80,7 @@ def tokenize(text, url_place_holder_string="urlplaceholder"):
     return clean_tokens
 
 
-## From Piplines >> ML Pipeline Preparation.ipynb
+## From /Piplines >> ML Pipeline Preparation.ipynb
 # The InitialVerbDetector class is a custom scikit-learn transformer that identifies if any sentence
 # within a given text starts with a verb. It inherits from BaseEstimator and TransformerMixin and
 # implements the fit() and transform() methods.
@@ -74,7 +90,7 @@ class InitialVerbDetector(BaseEstimator, TransformerMixin):
         sentences = nltk.sent_tokenize(input_text)
 
         for sentence in sentences:
-            pos_tags = nltk.pos_tag(tokenize(sentence))
+            pos_tags = nltk.pos_tag(tokenize1(sentence))
             initial_word, initial_tag = pos_tags[0]
 
             if initial_tag in ['VB', 'VBP'] or initial_word == 'RT':
@@ -92,6 +108,11 @@ class InitialVerbDetector(BaseEstimator, TransformerMixin):
 
 
 def build_pipeline():
+    # using the improved version of 'pipe1' with GridSerchCV
+    # from 'ML Pipeline Preparation.ipynb'
+    # with these 'hyperparameters':
+    # learning_rate=0.03
+    # n_estimators=13
 
     pipe1 = Pipeline([
         ('features', FeatureUnion([
@@ -99,16 +120,14 @@ def build_pipeline():
             ('text_pipeline', Pipeline([
                 ('count_vectorizer', CountVectorizer(tokenizer=tokenize)),
                 ('tfidf_transformer', TfidfTransformer())
-            ])),
-
-            ('ivd1', InitialVerbDetector() )
+            ]))
+            
         ])),
 
-        ('classifier', MultiOutputClassifier(AdaBoostClassifier()))
+        ('classifier', MultiOutputClassifier(AdaBoostClassifier(learning_rate=0.03, n_estimators=13)))
     ])
 
     return pipe1
-
 
 
 def evaluate_pipeline(pipeline, X_test, Y_test, category_names):
@@ -133,12 +152,26 @@ def save_model(model1, filepath1):
         pickle.dump(model1, file1)
     
 
+def copyfile1():
+    source = 'Piplines/ETL_Preparation.db'
+    destination = 'models'
+
+    try:
+        shutil.copy(source, destination)
+        print(f'File copied successfully.')
+    except Exception as e:
+        print(f'An error occurred while copying the file: {e}')
+        sys.exit(1)
+
 
 def main():
 
     if len(sys.argv) == 3:
         # make sure to use a different 'pickle' file name for each run
         # python train_classifier.py ../Piplines/ETL_Preparation.db new1.pkl 
+
+        # copy the ETL_Preparation.db to the 'models' folder
+        # copyfile1()
 
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
