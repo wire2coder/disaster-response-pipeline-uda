@@ -71,8 +71,8 @@ pip install -r requirements.txt
 
 ## Executing Program
 
-go back to the 'root location' before running the command below
-'root location' is disaster-response-pipeline-uda
+- go back to the 'root location' before running the command below
+- 'root location' is disaster-response-pipeline-uda
 
 Making the database file
 ```
@@ -82,14 +82,18 @@ python data/process_data.py data/disaster_messages.csv data/disaster_categories.
 Making the 'pickle file'
 ```
 python models/train_classifier.py ./ETL_Preparation.db ./mo3.pkl
-python app/run.py 
 ```
 
 Run the 'Flask application'
 ```
-cd app
-python run.py
+python app/run.py 
 ```
+
+Or just one long command (Linux)
+```
+python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv ETL_Preparation.db && python models/train_classifier.py ./ETL_Preparation.db ./mo3.pkl && python app/run.py 
+```
+
 go to http://127.0.0.1:3001/
 
 

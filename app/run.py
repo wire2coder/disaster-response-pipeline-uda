@@ -56,11 +56,13 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../Piplines/ETL_Preparation.db')
+# fix1
+engine = create_engine('sqlite:///./ETL_Preparation.db')
 df = pd.read_sql_table('ETL_Preparation', engine)
 
 # load model
-model = joblib.load("../models/mo2.pkl")
+# fix1
+model = joblib.load("./mo3.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model

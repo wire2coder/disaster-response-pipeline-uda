@@ -49,7 +49,7 @@ def load_data(database_filepath):
     return X, y, category_names
 
 
-def tokenize1(text, url_place_holder_string="urlplaceholder"):
+def tokenize(text, url_place_holder_string="urlplaceholder"):
     # what does this fuction do?
     # 1. Replace all urls with a urlplaceholder string
     # 2. Extract all the urls from the provided text
@@ -90,7 +90,7 @@ class InitialVerbDetector(BaseEstimator, TransformerMixin):
         sentences = nltk.sent_tokenize(input_text)
 
         for sentence in sentences:
-            pos_tags = nltk.pos_tag(tokenize1(sentence))
+            pos_tags = nltk.pos_tag(tokenize(sentence))
             initial_word, initial_tag = pos_tags[0]
 
             if initial_tag in ['VB', 'VBP'] or initial_word == 'RT':
@@ -118,7 +118,7 @@ def build_pipeline():
         ('features', FeatureUnion([
 
             ('text_pipeline', Pipeline([
-                ('count_vectorizer', CountVectorizer(tokenizer=tokenize1)),
+                ('count_vectorizer', CountVectorizer(tokenizer=tokenize)),
                 ('tfidf_transformer', TfidfTransformer())
             ]))
             
