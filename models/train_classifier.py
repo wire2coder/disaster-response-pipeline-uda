@@ -127,7 +127,24 @@ def build_pipeline():
         ('classifier', MultiOutputClassifier(AdaBoostClassifier(learning_rate=0.03, n_estimators=13)))
     ])
 
-    return pipe1
+    # 0526_Fri_16June2023
+    # using 'GridSearchCV' to find the best parameters from a 'dict' of parameters
+    # have to prefix the parameter names with clf__estimator__, 
+    # use clf__estimator__learning_rate and clf__estimator__n_estimators in the parameter_dict1.
+    parameter_dict1 = {
+        'classifier__estimator__learning_rate': [0.01, 0.03],
+        'classifier__estimator__n_estimators': [10, 13]
+    }
+
+    from sklearn.model_selection import GridSearchCV
+    betterPipe1 = GridSearchCV(pipe1, param_grid=parameter_dict1, cv=5, n_jobs=-1, verbose=3)
+
+   
+    # [CV 3/5] END classifier__estimator__learning_rate=0.03, classifier__estimator__n_estimators=13;, score=0.185 total time= 1.6min
+    # [CV 4/5] END classifier__estimator__learning_rate=0.03, classifier__estimator__n_estimators=13;, score=0.182 total time= 1.6min
+    # [CV 5/5] END classifier__estimator__learning_rate=0.03, classifier__estimator__n_estimators=13;, score=0.195 total time= 1.4min
+
+    return betterPipe1
 
 
 def evaluate_pipeline(pipeline, X_test, Y_test, category_names):
